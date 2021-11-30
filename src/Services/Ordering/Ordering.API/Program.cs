@@ -4,7 +4,8 @@ using Microsoft.Extensions.Logging;
 using Ordering.API.Extensions;
 using Ordering.Infrastructure.Persistence;
 using Microsoft.Extensions.DependencyInjection;
-
+using Common.Logging;
+using Serilog;
 
 namespace Ordering.API
 {
@@ -26,6 +27,7 @@ namespace Ordering.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .UseSerilog(SeriLogger.Configure)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
