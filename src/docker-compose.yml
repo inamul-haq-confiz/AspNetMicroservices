@@ -27,11 +27,11 @@ services:
        context: .
        dockerfile: Services/Basket/Basket.API/Dockerfile
 
-  discount.api:
-    image: ${DOCKER_REGISTRY-}discountapi
-    build:
-      context: .
-      dockerfile: Services/Discount/Discount.API/Dockerfile
+  #discount.api:
+  #  image: ${DOCKER_REGISTRY-}discountapi
+  #  build:
+  #    context: .
+  #    dockerfile: Services/Discount/Discount.API/Dockerfile
 
   discount.grpc:
     image: ${DOCKER_REGISTRY-}discountgrpc
@@ -59,9 +59,20 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
-
   kibana:
     image: docker.elastic.co/kibana/kibana:7.9.2
+
+  webstatus:
+    image: ${DOCKER_REGISTRY-}webstatus
+    build:
+      context: .
+      dockerfile: WebApps/WebStatus/Dockerfile
+
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: .
+      dockerfile: Security/IdentityServer/Dockerfile
 
 volumes:
   mongo_data:
@@ -69,6 +80,8 @@ volumes:
   postgres_data:
   pgadmin_data:
   elasticsearch-data:
+
+
 
 
 

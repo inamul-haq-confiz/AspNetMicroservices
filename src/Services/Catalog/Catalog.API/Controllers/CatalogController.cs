@@ -44,7 +44,6 @@ namespace Catalog.API.Controllers
             }
             return Ok(product);
         }
-
         [Route("[action]/{category}", Name = "GetProductByCategory")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
@@ -53,7 +52,7 @@ namespace Catalog.API.Controllers
             var products = await _repository.GetProductByCategory(category);
             return Ok(products);
         }
-        [Authorize("ClientIdPolicy")]
+        //[Authorize("ClientIdPolicy")]
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
@@ -62,14 +61,14 @@ namespace Catalog.API.Controllers
 
             return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
         }
-        [Authorize("ClientIdPolicy")]
+        //[Authorize("ClientIdPolicy")]
         [HttpPut]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {
             return Ok(await _repository.UpdateProduct(product));
         }
-        [Authorize("ClientIdPolicy")]
+        //[Authorize("ClientIdPolicy")]
         [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteProductById(string id)
